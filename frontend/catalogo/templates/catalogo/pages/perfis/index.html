@@ -1,0 +1,119 @@
+{% extends "catalogo/base.html" %}
+{% block title %}Perfis{% endblock %}
+
+{% block content %}
+    <section class="animate-fadeIn mt-10 shadow-[0_0_4px_1px_rgba(255,255,255,.3)] p-10 rounded-sm flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+            <h1 class="text-5xl mb-6 font-semibold">Perfis</h1>
+            <a href="{%url 'catalogo:perfis-novo' %}" class="mt-4 py-2 px-6 bg-indigo-700 text-neutral-50 rounded-sm hover:bg-indigo-500 cursor-pointer transition-all duration-300 text-lg">Criar perfil</a>
+        </div>
+        <form method="get">
+            <div>
+                <input
+                class="
+                px-4
+                py-2
+                border-1
+                border-neutral-50
+                rounded-sm
+                w-full
+                mb-4"
+                type="text" name="search" placeholder="Buscar por nome, email ou código">
+                <input
+                class="
+                px-4
+                py-2
+                border-1
+                border-neutral-50
+                rounded-sm
+                w-full
+                mb-4"
+                type="text" name="codigo" placeholder="Código ex: MAT.2025.2">
+            </div>
+            <div class="flex gap-3">
+                <select class=" py-1 px-4 border-1 rounded-sm [&>option]:bg-neutral-600" name="ativo">
+                    <option value="">Todos</option>
+                    <option value="true">Ativos</option>
+                    <option value="false">Inativos</option>
+                </select>
+                <button type="submit" class="mt-4 py-2 px-6 bg-indigo-700 text-neutral-50 rounded-sm hover:bg-indigo-500 cursor-pointer transition-all duration-300 text-lg">Filtrar</button>
+            </div>
+        </form>
+
+        <div class="grid grid-cols-1 justify-center items-center gap-5">
+            {% for perfil in results %}
+                <div class="shadow-[0_0_4px_1px_rgba(255,255,255,.3)] p-10 rounded-sm">
+                    <div class="flex flex-col gap-2 [&>div>span]:text-xs [&>div>span]:font-medium [&>div>span]:text-neutral-500">
+                        <div class="flex gap-2">
+                            <div class="mb-4 [&>span]:px-2 [&>span]:py-1 [&>span]:rounded-full [&>span]:!text-white [&>span]:font-medium [&>span]:text-[10px]">
+                                {% if perfil.ativo %}<span class="bg-green-600">Ativo</span> {% else %}<span class="bg-gray-500">Inativo</span>{% endif %}
+                            </div>
+                            <div class="mb-4 [&>span]:px-2 [&>span]:py-1 [&>span]:rounded-full [&>span]:!text-white [&>span]:font-medium [&>span]:text-[10px]">
+                                <span class="bg-blue-600">{{perfil.codigo}}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Nome</span>
+                            <h2> {{perfil.nome}} - ({{perfil.tipo}})</h2>
+                        </div>
+            
+                        <div>
+                            <span>Email</span>
+                            <p>{{perfil.email}}</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 w-full">
+                        <a href="{%url 'catalogo:perfis-editar' perfil.id %}" class="mt-4 py-2 px-6 bg-indigo-700 text-neutral-50 rounded-sm hover:bg-indigo-500 cursor-pointer transition-all duration-300 text-lg">Editar</a>
+                        <a href="{%url 'catalogo:perfis-detalhe' perfil.id %}" class="mt-4 py-2 px-6 bg-indigo-700 text-neutral-50 rounded-sm hover:bg-indigo-500 cursor-pointer transition-all duration-300 text-lg">Ver</a>
+                        <div>
+                            {% if perfil.tipo != "Gerente" %}
+                                {% if perfil.ativo %}
+                                    <form action="{% url 'catalogo:perfis-inativar' perfil.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="mt-4 py-2 px-6 bg-gray-700 text-neutral-50 rounded-sm hover:bg-gray-500 cursor-pointer transition-all duration-300 text-lg">Inativar</button>
+                                    </form>
+                                {% else %}
+                                    <form action="{% url 'catalogo:perfis-ativar' perfil.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="mt-4 py-2 px-6 bg-green-700 text-neutral-50 rounded-sm hover:bg-green-500 cursor-pointer transition-all duration-300 text-lg">Ativar</button>
+                                    </form>
+                                
+                                {% endif %} 
+                            {% endif %}
+  
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <form action="" method="post" class="
+        flex 
+        gap-2 
+        [&>button]:mt-4 
+        [&>button]:py-2 
+        [&>button]:px-6 
+        [&>button]:cursor-pointer 
+        [&>button]:transition-all 
+        [&>button]:duration-300 
+        [&>button]:text-lg 
+        [&>button]:text-neutral-50 
+        [&>button]:rounded-sm 
+        [&>button]:hover:bg-neutral-500 
+        [&>button]:disabled:bg-neutral-800 
+        [&>button]:disabled:hover:bg-neutral-800 
+        [&>button]:disabled:cursor-not-allowed
+        ">
+            {% if previous %} 
+                <button class="bg-sky-700">Anterior</button> 
+            {% else %} 
+                <button disabled>Anterior</button> 
+            {% endif %}
+
+            {% if next %}
+             <button class="bg-sky-700">Próximo</button>  
+            {% else %}
+                <button disabled>Próximo</button> 
+            {% endif %}
+        </form>
+    </section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "catalogo/base.html" %}
+{% block title %}Curso | {{nome}}{% endblock %}
+
+{% block content %}
+    <section class="animate-fadeIn mt-10 shadow-[0_0_4px_1px_rgba(255,255,255,.3)] p-10 rounded-sm flex flex-col gap-3 relative">
+            <span class="absolute top-4 right-4 font-medium">{{carga_horaria_total}}h</span>
+            <div class="mb-4 [&>span]:px-2 [&>span]:py-1 [&>span]:rounded-full [&>span]:text-white [&>span]:font-medium [&>span]:text-[10px]">
+                {% if ativo %}<span class="bg-green-600">Ativo</span> {% else %}<span class="bg-gray-500">Inativo</span>{% endif %}
+            </div>
+            <div class="flex gap-2">
+                <h1 class="text-2xl">{{nome}} - ({{sigla}})</h1>
+            </div>
+            <div class="mt-3">
+                <p class="text-neutral-400 text-lg">{{descricao}}</p>
+            </div>
+    </section>
+{% endblock %}
