@@ -14,7 +14,7 @@ cd Gestao_de_cursos
 
 ### 2. Construa e suba os containers
 ```bash
-docker compose up --build
+docker compose up --build -d
 ```
 
 ### 3. Execute as migrações e crie o superusuário (API)
