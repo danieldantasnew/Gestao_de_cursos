@@ -1,0 +1,57 @@
+{% extends "catalogo/base.html" %}
+{% block title %}Editar curso{% endblock %}
+
+{% block content %}
+    <section class="animate-fadeIn mt-10 shadow-[0_0_4px_1px_rgba(255,255,255,.3)] py-10 px-12 rounded-sm">
+        <form method="post" class="
+            [&>div>label]:text-lg 
+            flex 
+            flex-col 
+            gap-3
+            min-w-72
+            [&>div]:flex
+            [&>div]:flex-col
+            [&>div]:gap-1
+            [&>div>input]:px-4
+            [&>div>input]:py-2
+            [&>div>input]:border-1
+            [&>div>textarea]:px-4
+            [&>div>textarea]:py-2
+            [&>div>textarea]:border-1
+            [&>div>input]:border-neutral-50
+            [&>div>input]:rounded-sm
+        ">
+            {% csrf_token %}
+            <h1 class="text-5xl mb-6 font-semibold">Editar Curso</h1>
+            <div class="flex !flex-row gap-1">
+                <label for="ativo">Ativo?</label>
+                <input type="checkbox" name="ativo" id="ativo" {% if ativo %}checked{% endif %}>
+            </div>
+            <div>
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" placeholder="Nome do curso" value="{{nome}}" required>
+            </div>
+            <div>
+                <label for="sigla">Sigla</label>
+                <input type="text" name="sigla" id="sigla" placeholder="Sigla do curso" value="{{sigla}}" maxlength="4" required>
+            </div>
+
+            <div>
+                <label for="descricao">Descrição</label>
+                <textarea type="text" name="descricao" id="descricao" placeholder="Descrição do curso..." required>{{descricao}}</textarea>
+            </div>
+
+            <div>
+                <label for="carga-horaria">Carga Horária Total (Horas)</label>
+                <input type="number" name="carga-horaria" id="carga-horaria" placeholder="Carga horária total do curso" value="{{carga_horaria_total}}" required>
+            </div>
+            
+
+            <button type="submit" class="mt-4 py-2 px-2 bg-indigo-700 text-neutral-50 rounded-sm hover:bg-indigo-500 cursor-pointer transition-all duration-300 text-lg">Salvar</button>
+            
+            {% if error %}
+                <p style="color:red;">Erro: {{ error }}</p>
+            {% endif %}
+        </form>
+    </section>
+{% endblock %}

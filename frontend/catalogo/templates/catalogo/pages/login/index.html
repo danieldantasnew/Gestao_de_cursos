@@ -1,0 +1,39 @@
+{% extends "catalogo/base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <section class="animate-fadeIn mt-10 shadow-[0_0_4px_1px_rgba(255,255,255,.3)] p-10 rounded-sm">
+        <form method="post" class="
+            [&>div>label]:text-lg 
+            flex 
+            flex-col 
+            gap-3
+            min-w-72
+            [&>div]:flex
+            [&>div]:flex-col
+            [&>div]:gap-1
+            [&>div>input]:px-4
+            [&>div>input]:py-2
+            [&>div>input]:border-1
+            [&>div>input]:border-neutral-50
+            [&>div>input]:rounded-sm
+        ">
+            {% csrf_token %}
+            <h1 class="text-5xl mb-6 font-semibold">Login</h1>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="seu@email.com" required>
+            </div>
+            <div>
+                <label for="password">Senha</label>
+                <input type="password" name="password" id="password" placeholder="******" required>
+            </div>
+
+            <button type="submit" class="mt-4 py-2 px-2 bg-indigo-700 text-neutral-50 rounded-sm hover:bg-indigo-500 cursor-pointer transition-all duration-300 text-lg">Entrar</button>
+            
+            {% if error %}
+                <p style="color:red;">Erro: {{ error }}</p>
+            {% endif %}
+        </form>
+    </section>
+{% endblock %}

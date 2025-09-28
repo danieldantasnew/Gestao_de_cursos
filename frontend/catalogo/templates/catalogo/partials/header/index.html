@@ -1,0 +1,13 @@
+<header class="animate-fadeIn flex items-center justify-between gap-2 shadow-[0_0_4px_1px_rgba(255,255,255,.3)] p-10 rounded-sm m-4 [&>a]:text-center [&>a]:flex-1 container">
+    <a href="{% url 'catalogo:dashboard' %}" class="py-2 px-6 bg-sky-600 text-neutral-50 rounded-sm hover:bg-sky-700 cursor-pointer transition-all duration-300 text-lg">Dashboard</a>
+    <a href="{% url 'catalogo:perfis' %}" class="py-2 px-6 bg-sky-600 text-neutral-50 rounded-sm hover:bg-sky-700 cursor-pointer transition-all duration-300 text-lg">Ver Perfis</a>
+    <a href="{% url 'catalogo:cursos' %}" class="py-2 px-6 bg-sky-600 text-neutral-50 rounded-sm hover:bg-sky-700 cursor-pointer transition-all duration-300 text-lg">Ver Cursos</a>
+    <a href="{% url 'catalogo:disciplinas' %}" class="py-2 px-6 bg-sky-600 text-neutral-50 rounded-sm hover:bg-sky-700 cursor-pointer transition-all duration-300 text-lg">Ver Disciplinas</a>
+
+    {% if logout %}
+        <a href="{% url 'catalogo:logout' %}" class="py-2 px-6 bg-red-800 text-neutral-50 rounded-sm hover:bg-red-600 cursor-pointer transition-all duration-300 text-lg">
+            Sair
+        </a>
+    {% endif %}
+
+</header>

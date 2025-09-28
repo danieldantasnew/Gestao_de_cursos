@@ -1,0 +1,23 @@
+{% extends "catalogo/base.html" %}
+{% block title %}Perfil | {{nome}}{% endblock %}
+
+{% block content %}
+    <section class="animate-fadeIn mt-10 shadow-[0_0_4px_1px_rgba(255,255,255,.3)] p-10 rounded-sm flex flex-col gap-3 relative [&>div>span]:text-xs [&>div>span]:font-medium [&>div>span]:text-neutral-500">
+        <div class="mb-4 [&>span]:px-2 [&>span]:py-1 [&>span]:rounded-full [&>span]:!text-white [&>span]:font-medium [&>span]:text-[10px]">
+            {% if ativo %}<span class="bg-green-600">Ativo</span> {% else %}<span class="bg-gray-500">Inativo</span>{% endif %}
+        </div>
+        <div>
+            <span>Matrícula</span>
+            <h2>{{codigo}}</h2>
+        </div>
+        <div>
+            <span>Nome</span>
+            <h2> {{nome}} - ({{tipo}})</h2>
+        </div>
+
+        <div>
+            <span>Email</span>
+            <p>{{email}}</p>
+        </div>
+    </section>
+{% endblock %}

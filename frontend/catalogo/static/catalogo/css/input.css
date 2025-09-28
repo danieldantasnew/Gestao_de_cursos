@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --font-myfont: Arial, helvetica, sans-serif;
+  --animate-fadeIn: fadeIn 0.3s ease-in-out forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    to {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+}
+
+@utility container {
+  max-width: 1240px !important;
+  margin: auto;
+  padding: 0 1rem;
+}
