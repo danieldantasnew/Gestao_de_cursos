@@ -8,19 +8,17 @@ Aplicação web desenvolvida com **Django** para gerenciamento de cursos, discip
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/Gestao_de_cursos.git
+git clone https://github.com/danieldantasnew/Gestao_de_cursos.git
 cd Gestao_de_cursos
 ```
 
 ### 2. Construa e suba os containers
 ```bash
-Copiar código
 docker compose up --build
 ```
 
 ### 3. Execute as migrações e crie o superusuário (API)
 ```bash
-Copiar código
 docker compose exec api python manage.py migrate
 docker compose exec api python manage.py createsuperuser
 ```
